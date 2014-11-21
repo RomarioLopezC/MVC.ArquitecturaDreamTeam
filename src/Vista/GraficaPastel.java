@@ -1,10 +1,5 @@
 package Vista;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import Modelo.Candidato;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -13,10 +8,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
-/**
- *
- * @author Carlos
- */
 public class GraficaPastel extends javax.swing.JFrame {
 
     /**

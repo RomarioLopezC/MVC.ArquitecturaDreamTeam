@@ -1,28 +1,20 @@
 package Modelo;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+import Cache.DreamTeamCache;
 import java.util.ArrayList;
 
-
-/**
- *
- * @author a09001005
- */
 public class AdminVotos extends Modelo {
 
+    private DreamTeamCache cache;
     static AdminVotos adminVtos;
     private ArrayList<Candidato> cands;
     private int contador = 0;
 
-    
     public AdminVotos() {
-        this.cands = new ArrayList();
+        this.cache = new DreamTeamCache();
+        cache.configLoad();
+
+        this.cands = listaCandidatos();
         inicializarCandidatos();
         inicializarEventos();
         super.datos = cands;
@@ -35,45 +27,40 @@ public class AdminVotos extends Modelo {
         return adminVtos;
     }
 
-    public void inicializarCandidatos() {
-        Candidato A = new Candidato("A");
-        cands.add(A);
-        Candidato B = new Candidato("B");
-        cands.add(B);
-        Candidato C = new Candidato("C");
-        cands.add(C);
+    private void inicializarCandidatos() {
+        Candidato A = new Candidato(1, "Romario");
+        cache.put(A.getId(), A);
+
+        Candidato B = new Candidato(2, "David");
+        cache.put(B.getId(), B);
+
+        Candidato C = new Candidato(3, "Victor");
+        cache.put(C.getId(), C);
     }
 
-    private void inicializarEventos() {
-        int numeroDeEventos=3;
+    public void inicializarEventos() {
+        int numeroDeEventos = 3;
         for (int i = 0; i < numeroDeEventos; i++) {
             eventos.add(new Evento(i));
         }
     }
 
+    public void agregarCandidatos(int id, String nombre) {
+        Candidato candidatoNuevo = new Candidato(id, nombre);
+        cache.put(id, candidatoNuevo);
 
-    public void agregarCandidatos(ArrayList<Candidato> candidatos) {
-        super.setDatos(candidatos);
         notificarObservadoresEvento(0);
     }
 
-    public void agregarVoto(String nombre) {
-        for (Candidato cand : (ArrayList<Candidato>) getDatos()) {
-            if (cand.getNombre().equals(nombre)) {
-                cand.agregarVoto();
-            }
-        }
-        notificarObservadoresEvento(0);
-    }
-
-    public void agregarCandidatos(String nombre) {
-        Candidato temp = new Candidato(nombre);
-        ((ArrayList<Candidato>) super.getDatos()).add(temp);
+    public void agregarVoto(int id) {
+        Candidato candidato = (Candidato) cache.get(id);
+        candidato.agregarVoto();
+        cache.put(id, candidato);
         notificarObservadoresEvento(0);
     }
 
     public void eliminarCandidatos(String nombre, String peticion) {
-        for (Candidato candidato : ((ArrayList<Candidato>)getDatos())) {
+        for (Candidato candidato : ((ArrayList<Candidato>) getDatos())) {
             if (candidato.getNombre().equals(nombre)) {
                 ((ArrayList<Candidato>) getDatos()).remove(candidato);
                 break;
@@ -81,6 +68,5 @@ public class AdminVotos extends Modelo {
         }
         notificarObservadoresEvento(0);
     }
-
 
 }

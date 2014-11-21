@@ -1,33 +1,29 @@
 package Modelo;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author a09001005
- */
+import Cache.DreamTeamCache;
 import java.util.ArrayList;
-
 
 public class Modelo {
 
     //Este atributo privado mantiene el vector con los observadores
     protected ArrayList<Evento> eventos;
     protected Object datos;
+    private final DreamTeamCache cache;
+    private static final int MAX_ELEMENTOS_CACHE = 1000;
 
-    //El constructor crea el vector con la asociacion Observable-Observador
+    //El constructor crea el vector con la asociacion Observable-Observador 
+    //De igual manera se ingresa lo necesario para hacer que la cache funcione
     public Modelo() {
+        this.cache = new DreamTeamCache();
+        cache.configLoad();
+
         eventos = new ArrayList();
     }
 
     public void registrarObservador(Observer observer, int idEvento) {
         for (Evento evento : eventos) {
-            if (evento.getIdEvento()==idEvento) {
-                evento.agregarMiembro( observer);
+            if (evento.getIdEvento() == idEvento) {
+                evento.agregarMiembro(observer);
                 return;
             }
         }
@@ -35,7 +31,7 @@ public class Modelo {
 
     public void eliminarObservador(Observer observer, int idEvento) {
         for (Evento evento : eventos) {
-            if (evento.getIdEvento()==idEvento) {
+            if (evento.getIdEvento() == idEvento) {
                 evento.eliminarMiembro(observer);
                 return;
             }
@@ -77,4 +73,23 @@ public class Modelo {
         this.datos = datos;
     }
 
+    /**
+     * Método que obtiene los candidatos de la cache y los ingresa a un
+     * ArrayList
+     *
+     * @return regresa la lista de candidatos
+     */
+    public ArrayList<Candidato> listaCandidatos() {
+        ArrayList<Candidato> candidatos = new ArrayList<>();
+        //Se recorre la cache para agregar los candidatos que tenga dentro:
+        for (int i = 1; i < MAX_ELEMENTOS_CACHE; i++) {
+            Candidato unCandidato = (Candidato) cache.get(i);
+            //si devuelve null, se deja de recorrer la cache
+            if (unCandidato == null) {
+                break;
+            }
+            candidatos.add(unCandidato);
+        }
+        return candidatos;
+    }
 }

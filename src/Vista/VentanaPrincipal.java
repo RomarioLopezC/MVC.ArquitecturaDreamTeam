@@ -5,15 +5,10 @@ package Vista;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import Controlador.*;
 import Modelo.Candidato;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 
 /**
  *
@@ -33,10 +28,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void rellenarCBoxCandidatos(ArrayList<Candidato> candidatos) {
+    public void inicializaVentana(ArrayList<Candidato> candidatos) {
         DefaultComboBoxModel modeloCombo = new DefaultComboBoxModel();
-        for (Candidato cand : candidatos) {
-            modeloCombo.addElement(cand.getNombre());
+        for (Candidato candidato : candidatos) {
+            modeloCombo.addElement(candidato.getId() + "  "+candidato.getNombre());
         }
         comboCandidatos.setModel(modeloCombo);
 
@@ -150,11 +145,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVotarActionPerformed
-        ev.realizarVotacion((String) comboCandidatos.getSelectedItem());
+        String candidato = comboCandidatos.getSelectedItem().toString();
+        String[] candidatoID = candidato.split("  ");
+        int id;
+        id = Integer.parseInt(candidatoID[0]);
+
+        ev.realizarVotacion(id);
     }//GEN-LAST:event_btnVotarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        adminCan.agregarCandidato(txtNombre.getText());
+        int id = comboCandidatos.getItemCount();
+        id++;
+        adminCan.agregarCandidato(id, txtNombre.getText());
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
