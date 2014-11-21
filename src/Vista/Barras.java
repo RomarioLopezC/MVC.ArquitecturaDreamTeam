@@ -43,7 +43,7 @@ public class Barras extends Vista{
 
     @Override
     public void desplegar(){
-        System.out.println(candidatos.size());
+        System.out.println("Barras candidatos: "+candidatos.size());
         for (Candidato candidato : candidatos) {
             System.out.println(candidato.getNombre());
         }

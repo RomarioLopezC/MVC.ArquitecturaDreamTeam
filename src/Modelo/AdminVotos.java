@@ -13,9 +13,8 @@ public class AdminVotos extends Modelo {
     public AdminVotos() {
         this.cache = new DreamTeamCache();
         cache.configLoad();
-
-        this.cands = listaCandidatos();
         inicializarCandidatos();
+        this.cands = listaCandidatos();
         inicializarEventos();
         super.datos = cands;
     }
@@ -48,7 +47,7 @@ public class AdminVotos extends Modelo {
     public void agregarCandidatos(int id, String nombre) {
         Candidato candidatoNuevo = new Candidato(id, nombre);
         cache.put(id, candidatoNuevo);
-
+        super.datos=listaCandidatos();
         notificarObservadoresEvento(0);
     }
 

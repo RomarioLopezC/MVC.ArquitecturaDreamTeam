@@ -2,6 +2,9 @@ package Modelo;
 
 import Cache.DreamTeamCache;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.jcs.access.exception.CacheException;
 
 public class Modelo {
 
@@ -16,7 +19,6 @@ public class Modelo {
     public Modelo() {
         this.cache = new DreamTeamCache();
         cache.configLoad();
-
         eventos = new ArrayList();
     }
 
