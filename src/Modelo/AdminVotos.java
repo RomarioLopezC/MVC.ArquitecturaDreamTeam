@@ -5,14 +5,11 @@ import java.util.ArrayList;
 
 public class AdminVotos extends Modelo {
 
-    private DreamTeamCache cache;
     static AdminVotos adminVtos;
     private ArrayList<Candidato> cands;
     private int contador = 0;
 
     public AdminVotos() {
-        this.cache = new DreamTeamCache();
-        cache.configLoad();
         inicializarCandidatos();
         this.cands = listaCandidatos();
         inicializarEventos();
@@ -57,7 +54,7 @@ public class AdminVotos extends Modelo {
         cache.put(id, candidato);
         notificarObservadoresEvento(0);
     }
-
+  
     public void eliminarCandidatos(String nombre, String peticion) {
         for (Candidato candidato : ((ArrayList<Candidato>) getDatos())) {
             if (candidato.getNombre().equals(nombre)) {

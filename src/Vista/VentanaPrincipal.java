@@ -157,10 +157,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int id = comboCandidatos.getItemCount();
         id++;
         adminCan.agregarCandidato(id, txtNombre.getText());
+        txtNombre.setText(" ");
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         adminCan.eliminarCandidato(txtElim.getText());
+        txtElim.setText(" ");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**

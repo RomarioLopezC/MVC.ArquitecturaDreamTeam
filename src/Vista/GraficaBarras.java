@@ -1,10 +1,5 @@
 package Vista;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import Modelo.Candidato;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -16,10 +11,6 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-/**
- *
- * @author Carlos
- */
 public class GraficaBarras extends javax.swing.JFrame {
 
     /**

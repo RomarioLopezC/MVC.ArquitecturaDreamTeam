@@ -2,16 +2,13 @@ package Modelo;
 
 import Cache.DreamTeamCache;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.jcs.access.exception.CacheException;
 
 public class Modelo {
 
     //Este atributo privado mantiene el vector con los observadores
     protected ArrayList<Evento> eventos;
     protected Object datos;
-    private final DreamTeamCache cache;
+    public static DreamTeamCache cache;
     private static final int MAX_ELEMENTOS_CACHE = 1000;
 
     //El constructor crea el vector con la asociacion Observable-Observador 
